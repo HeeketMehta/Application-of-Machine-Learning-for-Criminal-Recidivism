@@ -9,7 +9,7 @@ np.random.seed(0)
 from sklearn.metrics import accuracy_score,recall_score,confusion_matrix
 
 
-
+from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
 
 
@@ -17,13 +17,13 @@ from sklearn.model_selection import train_test_split
 
 #####  CLEANING STAGE ###############
 
-df = pd.read_csv('rec2.csv')
+df = pd.read_csv('datasets/recidivism_data_Analysis.csv')
 
 
 
 
-df = df.drop(['MiddleName', 'DateOfBirth', 'Screening_Date', 'IsCompleted', 
-	'IsDeleted', 'AssessmentReason', 'LastName', 'FirstName','Screening_year', 'Year_birth'], axis = 1)
+df = df.drop(['Person_ID','MiddleName', 'DateOfBirth', 'Screening_Date', 'IsCompleted', 
+	'IsDeleted', 'AssessmentReason', 'LastName', 'FirstName','Screening_year', 'Year_birth', 'RawScore'], axis = 1)
 
 
 #### TO DROP THE BLANK VALUES IN THE SCORE TEXT FIELD - WE DROPPED COZ ONLY 2 SUCH TUPLES, HENCE WOULDNT MAKE MUCH OF DIFFERENCE. ####################
@@ -128,8 +128,10 @@ df2['ScoreText'] = df2['ScoreText'].map(dict1)
 
 
 
-features = df2.columns[:16]
-print(features)
+features = df2.columns[1:17]
+
+# print(features)
+
 
 X_1 = np.array(df2[features])
 
@@ -141,19 +143,12 @@ print("no of training samples", len(y_train))  ## 45678
 print("no of testing samples", len(y_test)) ## 15120
 
 
-# features = df2.columns[:15]
 
-# print(features)
-# y = train['ScoreText']
-
+logreg = LogisticRegression()
+logreg.fit(X_train, y_train)
 
 
-# print(y)
-clf = RandomForestClassifier(n_jobs= 2, random_state = 0)
-
-clf.fit(X_train, y_train)
-
-Y_predict = clf.predict(X_test)
+Y_predict = logreg.predict(X_test)
 
 # print(Y_predict)
 # print(test['ScoreText'])

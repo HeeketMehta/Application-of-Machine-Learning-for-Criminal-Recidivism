@@ -1,7 +1,5 @@
 from sklearn.ensemble import RandomForestClassifier
 
-import sklearn
-
 import numpy as np
 
 import pandas as pd
@@ -11,44 +9,38 @@ np.random.seed(0)
 from sklearn.metrics import accuracy_score,recall_score,confusion_matrix
 
 
+
 from sklearn.model_selection import train_test_split
+
 
 
 
 #####  CLEANING STAGE ###############
 
-df2 = pd.read_csv('data1.csv')
-
-
-# print(len(df))
+df = pd.read_csv('datasets/recidivism_data_Analysis.csv')
 
 
 
 
-# df = df.drop(['Person_ID', 'AssessmentID', 'Case_ID', 'MiddleName', 'DateOfBirth', 'Screening_Date', 'IsCompleted', 
-# 	'IsDeleted', 'AssessmentReason', 'LastName', 'FirstName'], axis = 1)
+df = df.drop(['Person_ID','MiddleName', 'DateOfBirth', 'Screening_Date', 'IsCompleted', 
+	'IsDeleted', 'AssessmentReason', 'LastName', 'FirstName','Screening_year', 'Year_birth', 'RawScore'], axis = 1)
 
 
 #### TO DROP THE BLANK VALUES IN THE SCORE TEXT FIELD - WE DROPPED COZ ONLY 2 SUCH TUPLES, HENCE WOULDNT MAKE MUCH OF DIFFERENCE. ####################
-df2['ScoreText'].replace('', np.nan, inplace=True)
-df2.dropna(subset=['ScoreText'], inplace=True)
+df['ScoreText'].replace('', np.nan, inplace=True)
+df.dropna(subset=['ScoreText'], inplace=True)
 
 
 
 # print(df.head(10))
-# df.to_csv('data1.csv')
-# # print(df.describe())
-
-
-
-
-
+df.to_csv('cleaned_data.csv')
+# print(df.describe())
 
 
 ############### cleaned_data.csv is the final dataset we obtain #######################
 
 
-# df2 = pd.read_csv('data1.csv')
+df2 = pd.read_csv('cleaned_data.csv')
 
 
 
@@ -119,7 +111,8 @@ df2['ScoreText'] = df2['ScoreText'].map(dict1)
 # print(df2.head(20))
 
 
-#########################################################################
+######################################
+
 
 
 
@@ -131,40 +124,62 @@ df2['ScoreText'] = df2['ScoreText'].map(dict1)
 
 
 ########## SPLITTING AND APPLICATION OF ALGORITHM ########################
+# train, test = df2[df2['is_train'] == True] , df2[df2['is_train'] == False]
 
 
-features = df2.columns[:15]
+
+features = df2.columns[1:17]
+
+# print(features)
+
 
 X_1 = np.array(df2[features])
 
 y_1 = np.array(df2['ScoreText'])
 
-X_train, X_test, y_train, y_test = train_test_split(X_1, y_1, test_size=0.33, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(X_1, y_1, test_size=0.30, random_state=42)
 
-# train, test = df2[df2['is_train'] == True] , df2[df2['is_train'] == False]
+print("no of training samples", len(y_train))  ## 45678
+print("no of testing samples", len(y_test)) ## 15120
 
-print("no of training samples", len(X_train))  ## 45678
-print("no of testing samples", len(X_test)) ## 15120
 
+# features = df2.columns[:15]
 
 # print(features)
+# y = train['ScoreText']
+
+
+
+# print(y)
+clf = RandomForestClassifier(n_jobs= 2, random_state = 0)
+
+clf.fit(X_train, y_train)
+
+Y_predict = clf.predict(X_test)
+
+# print(Y_predict)
+# print(test['ScoreText'])
+# print("ACCURACY :     ",accuracy_score(Y_predict, test['ScoreText'])*100)
+
+
+
+# preds = df2.ScoreText[Y_predict]  ####### HERE, INSTEAD OF PREDICT(TEST[FEATURES]), WE CAN ENTER ANY TUPLE OF ATTRIBUTES TO PREDICT SCORE TEXT 
+# print(preds[0:5])
+# print(test['ScoreText'])
+# print(preds)
+# print(preds[0:10])
+
+# print(preds[190:540])
+
+print(pd.crosstab(y_test, Y_predict, rownames = ['Actual Outcome'], colnames = ['Predicted Outcome']))
+# print(preds[0:20])
+# print(test['ScoreText'].head(20))
+
+# print("Train acc : ", accuracy_score(train['ScoreText'], y))
+
+
+print("ACCURACY :     ",accuracy_score(Y_predict, y_test)*100)
 
 
 
 
-rf = RandomForestClassifier(n_estimators = 1000, random_state = 42)
-
-rf.fit(X_train, y_train)
-
-prediction = rf.predict(X_test)#.reshape(-1,1)
-
-cm = sklearn.metrics.confusion_matrix(y_test, prediction)
-
-print(cm)
-
-
-
-print("ACCURACY IS - ",accuracy_score(y_test, prediction)*100)
-
-
-print(pd.crosstab(y_test, prediction, rownames = ['Actual Outcome'], colnames = ['Predicted Outcome']))

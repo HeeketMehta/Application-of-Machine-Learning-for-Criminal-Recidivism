@@ -17,13 +17,13 @@ from sklearn.model_selection import train_test_split
 
 #####  CLEANING STAGE ###############
 
-df = pd.read_csv('recidivism_data_Analysis.csv')
+df = pd.read_csv('datasets/recidivism_data_Analysis.csv')
 
 
 
 
-df = df.drop(['Person_ID', 'AssessmentID', 'Case_ID', 'MiddleName', 'DateOfBirth', 'Screening_Date', 'IsCompleted', 
-	'IsDeleted', 'AssessmentReason', 'LastName', 'FirstName'], axis = 1)
+df = df.drop(['Person_ID', 'MiddleName', 'DateOfBirth', 'Screening_Date', 'IsCompleted', 
+	'IsDeleted', 'AssessmentReason', 'LastName', 'FirstName','RawScore'], axis = 1)
 
 
 #### TO DROP THE BLANK VALUES IN THE SCORE TEXT FIELD - WE DROPPED COZ ONLY 2 SUCH TUPLES, HENCE WOULDNT MAKE MUCH OF DIFFERENCE. ####################
@@ -128,7 +128,9 @@ df2['ScoreText'] = df2['ScoreText'].map(dict1)
 
 
 
-features = df2.columns[:16]
+features = df2.columns[1:17]
+
+# print(features)
 
 X_1 = np.array(df2[features])
 
