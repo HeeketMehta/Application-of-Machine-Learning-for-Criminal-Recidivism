@@ -6,7 +6,7 @@ import pandas as pd
 
 np.random.seed(0)
 
-from sklearn.metrics import accuracy_score,recall_score,confusion_matrix, classification_report
+from sklearn.metrics import accuracy_score,recall_score,confusion_matrix
 
 
 
@@ -22,8 +22,8 @@ df = pd.read_csv('datasets/recidivism_data_Analysis.csv')
 
 
 
-df = df.drop(['Person_ID', 'MiddleName', 'DateOfBirth', 'Screening_Date', 'IsCompleted', 
-	'IsDeleted', 'AssessmentReason', 'LastName', 'FirstName','RawScore'], axis = 1)
+df = df.drop(['Person_ID','MiddleName', 'DateOfBirth', 'Screening_Date', 'IsCompleted', 
+	'IsDeleted', 'AssessmentReason', 'LastName', 'FirstName','Screening_year', 'Year_birth', 'RawScore'], axis = 1)
 
 
 #### TO DROP THE BLANK VALUES IN THE SCORE TEXT FIELD - WE DROPPED COZ ONLY 2 SUCH TUPLES, HENCE WOULDNT MAKE MUCH OF DIFFERENCE. ####################
@@ -132,51 +132,35 @@ features = df2.columns[1:17]
 
 # print(features)
 
+
 X_1 = np.array(df2[features])
 
 y_1 = np.array(df2['ScoreText'])
 
 X_train, X_test, y_train, y_test = train_test_split(X_1, y_1, test_size=0.30, random_state=42)
 
-
 print("no of training samples", len(y_train))  ## 45678
 print("no of testing samples", len(y_test)) ## 15120
 
 
 
-from sklearn.preprocessing import StandardScaler
-scaler = StandardScaler()
-scaler.fit(X_train)
-
-X_train = scaler.transform(X_train)
-X_test = scaler.transform(X_test)
-
-
-
-from sklearn.neighbors import KNeighborsClassifier
-classifier = KNeighborsClassifier(n_neighbors=3)
-classifier.fit(X_train, y_train)
-
-# print("no of training samples", len(train))  ## 45678
-# print("no of testing samples", len(test)) ## 15120
-
-
-# features = df2.columns[:15]
-
-# print(features)
-# y = train['ScoreText']
-
-
-
 # print(y)
+clf = RandomForestClassifier(n_jobs= 2, random_state = 0)
+
+clf.fit(X_train, y_train)
+
+Y_predict = clf.predict(X_test)
+
+# print(y_test)
 
 
 
+# print("1 - Low")
+
+# print("2 - Medium")
 
 
-
-
-
+# print("3 - High")
 
 def convert_dict_value_to_string(a):
 	x = list(a)
@@ -195,15 +179,13 @@ def convert_dict_value_to_string(a):
 
 
 
+print(pd.crosstab(convert_dict_value_to_string(y_test), convert_dict_value_to_string(Y_predict), rownames = ['Actual Outcome'], colnames = ['Predicted Outcome']))
+
+# print("Train acc : ", accuracy_score(train['ScoreText'], y))
 
 
-y_pred = classifier.predict(X_test)
-# print(confusion_matrix(convert_dict_value_to_string(y_test), convert_dict_value_to_string(y_pred)))
-
-print(pd.crosstab(convert_dict_value_to_string(y_test), convert_dict_value_to_string(y_pred), rownames = ['Actual Outcome'], colnames = ['Predicted Outcome']))
+print("ACCURACY :     ",accuracy_score(Y_predict, y_test)*100)
 
 
-
-print("Accuracy :     ",accuracy_score(y_test, y_pred)*100)
 
 

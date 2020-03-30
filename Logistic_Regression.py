@@ -150,25 +150,46 @@ logreg.fit(X_train, y_train)
 
 Y_predict = logreg.predict(X_test)
 
-# print(Y_predict)
-# print(test['ScoreText'])
-# print("ACCURACY :     ",accuracy_score(Y_predict, test['ScoreText'])*100)
 
 
 
-# preds = df2.ScoreText[Y_predict]  ####### HERE, INSTEAD OF PREDICT(TEST[FEATURES]), WE CAN ENTER ANY TUPLE OF ATTRIBUTES TO PREDICT SCORE TEXT 
-# print(preds[0:5])
-# print(test['ScoreText'])
-# print(preds)
-# print(preds[0:10])
 
-# print(preds[190:540])
 
-print(pd.crosstab(y_test, Y_predict, rownames = ['Actual Outcome'], colnames = ['Predicted Outcome']))
-# print(preds[0:20])
-# print(test['ScoreText'].head(20))
 
-# print("Train acc : ", accuracy_score(train['ScoreText'], y))
+
+
+
+
+
+
+def convert_dict_value_to_string(a):
+	x = list(a)
+	# print(x)
+	# list_Y_predict = list(Y_predict)
+	for i in range (0,len(x)):
+		if x[i] == 1:
+			x[i] = "Low"
+		elif x[i]==2:
+			x[i] = "Medium"
+		else:
+			x[i] = "High"
+	alpha = np.asarray(x)
+	return alpha
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+print(pd.crosstab(convert_dict_value_to_string(y_test), convert_dict_value_to_string(Y_predict), rownames = ['Actual Outcome'], colnames = ['Predicted Outcome']))
 
 
 print("ACCURACY :     ",accuracy_score(Y_predict, y_test)*100)
