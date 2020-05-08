@@ -9,6 +9,8 @@ np.random.seed(0)
 from sklearn.metrics import accuracy_score,recall_score,confusion_matrix, classification_report
 
 
+from sklearn.model_selection import StratifiedKFold
+from sklearn import model_selection
 
 from sklearn.model_selection import train_test_split
 
@@ -207,3 +209,25 @@ print(pd.crosstab(convert_dict_value_to_string(y_test), convert_dict_value_to_st
 print("Accuracy :     ",accuracy_score(y_test, y_pred)*100)
 
 
+
+
+
+def Stratifiedkfoldtechnique(k_value):
+
+	print("StratifiedKFold RESULTS - FOR K = ",k_value)
+
+	skfold = StratifiedKFold(n_splits=k_value, random_state=100)
+	model_skfold = KNeighborsClassifier(n_neighbors=3)
+	results_skfold = model_selection.cross_val_score(model_skfold, X_train, y_train, cv=skfold)
+	print("Accuracy: %.2f%%" % (results_skfold.mean()*100.0))
+	# return 
+
+
+
+
+
+Stratifiedkfoldtechnique(2)
+Stratifiedkfoldtechnique(5)
+Stratifiedkfoldtechnique(10)
+Stratifiedkfoldtechnique(15)
+Stratifiedkfoldtechnique(20)

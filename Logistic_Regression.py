@@ -14,6 +14,10 @@ from sklearn.model_selection import train_test_split
 
 
 
+from sklearn.model_selection import StratifiedKFold
+from sklearn import model_selection
+
+
 
 #####  CLEANING STAGE ###############
 
@@ -197,3 +201,23 @@ print("ACCURACY :     ",accuracy_score(Y_predict, y_test)*100)
 
 
 
+
+def Stratifiedkfoldtechnique(k_value):
+
+	print("StratifiedKFold RESULTS - FOR K = ",k_value)
+
+	skfold = StratifiedKFold(n_splits=k_value, random_state=100)
+	model_skfold = LogisticRegression()
+	results_skfold = model_selection.cross_val_score(model_skfold, X_train, y_train, cv=skfold)
+	print("Accuracy: %.2f%%" % (results_skfold.mean()*100.0))
+	# return 
+
+
+
+
+
+Stratifiedkfoldtechnique(2)
+Stratifiedkfoldtechnique(5)
+Stratifiedkfoldtechnique(10)
+Stratifiedkfoldtechnique(15)
+Stratifiedkfoldtechnique(20)

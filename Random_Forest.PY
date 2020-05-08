@@ -9,6 +9,8 @@ np.random.seed(0)
 from sklearn.metrics import accuracy_score,recall_score,confusion_matrix
 
 
+from sklearn.model_selection import StratifiedKFold
+from sklearn import model_selection
 
 from sklearn.model_selection import train_test_split
 
@@ -117,7 +119,7 @@ df2['ScoreText'] = df2['ScoreText'].map(dict1)
 
 
 
-
+# df2.to_csv('datasets/send_for_k_cross.csv')
 
 
 
@@ -139,6 +141,7 @@ y_1 = np.array(df2['ScoreText'])
 
 X_train, X_test, y_train, y_test = train_test_split(X_1, y_1, test_size=0.30, random_state=42)
 
+
 print("no of training samples", len(y_train))  ## 45678
 print("no of testing samples", len(y_test)) ## 15120
 
@@ -147,6 +150,8 @@ print("no of testing samples", len(y_test)) ## 15120
 
 # print(features)
 # y = train['ScoreText']
+
+
 
 
 
@@ -187,12 +192,6 @@ def convert_dict_value_to_string(a):
 
 
 
-
-
-
-
-
-
 print(pd.crosstab(convert_dict_value_to_string(y_test), convert_dict_value_to_string(Y_predict), rownames = ['Actual Outcome'], colnames = ['Predicted Outcome']))
 # print(preds[0:20])
 # print(test['ScoreText'].head(20))
@@ -204,4 +203,28 @@ print("ACCURACY :     ",accuracy_score(Y_predict, y_test)*100)
 
 
 
+dict_value_importance = dict(zip(df2.columns, clf.feature_importances_))
+df3 = pd.DataFrame(dict_value_importance.items(), columns=['ATTRIBUTES', 'VALUES'])
+# df3.to_csv('datasets/importance.csv')
 
+
+
+
+def Stratifiedkfoldtechnique(k_value):
+
+	print("StratifiedKFold RESULTS - FOR K = ",k_value)
+
+	skfold = StratifiedKFold(n_splits=k_value, random_state=100)
+	model_skfold = RandomForestClassifier()
+	results_skfold = model_selection.cross_val_score(model_skfold, X_train, y_train, cv=skfold)
+	print("Accuracy: %.2f%%" % (results_skfold.mean()*100.0))
+
+
+
+
+
+Stratifiedkfoldtechnique(2)
+Stratifiedkfoldtechnique(5)
+Stratifiedkfoldtechnique(10)
+Stratifiedkfoldtechnique(15)
+Stratifiedkfoldtechnique(20)
