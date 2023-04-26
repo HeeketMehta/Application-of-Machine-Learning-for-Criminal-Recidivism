@@ -1,8 +1,5 @@
 # Classification Of Criminal Recidivism Based On Machine learning Techniques
 
-
-# A Machine Learning Approach to Analyze Marine Life Sustainability
-
 ```
 Heeket Mehta, Shanay Shah, Neil Patel, Pratik Kanani (2020)<br />
 “Classification of Criminal Recidivism Using Machine Learning Techniques”<br />
@@ -61,41 +58,37 @@ We propose the flow diagram below and execute the methodology in the following s
 ![Marital_status_vs_Reci](https://github.com/HeeketMehta/Application-of-Machine-Learning-for-Criminal-Recidivism/blob/master/OUTPUTS/Marital%20Status.JPG)<br />
 
 
+### Importance of Attributes
+
+![Attr_importance](https://github.com/HeeketMehta/Application-of-Machine-Learning-for-Criminal-Recidivism/blob/master/OUTPUTS/Importance%20of%20Attributes.JPG)<br />
+
+
 
 
 ## Machine Learning Results
 
-Random Forest algorithm performs the best, to classify the water quality into various classes, with the segragation being on the quality of water, for both being potable and for the marine life present in the waterbodies.<br />
+On comparing KNN, Logistic Regression and Random Forest, we get the following results of categorising or figuring if a person with given set of attributes would commit recidivism or not, and with how much probability.
+![Compare_vals](https://github.com/HeeketMehta/Application-of-Machine-Learning-for-Criminal-Recidivism/blob/master/OUTPUTS/OUTPUT_CMD.JPG)<br />
 
-The results - in terms of confusion matrix/ cross tab are mentioned below - 
-### Random Forest Implementation -
-![Random Forest Implementation](https://github.com/HeeketMehta/Marine-Life-Sustainability-using-ML/blob/master/OUTPUT/Random%20Forest%20Output.JPG)<br />
-
-### Support Vector Machine Implementation -
-![Support Vector Machine Implementation](https://github.com/HeeketMehta/Marine-Life-Sustainability-using-ML/blob/master/OUTPUT/SVM_OUTPUT.JPG)
-<br />
-
-### K-Nearest Neigbors Implementation -
-![K-Nearest Neigbors Implementation](https://github.com/HeeketMehta/Marine-Life-Sustainability-using-ML/blob/master/OUTPUT/KNN_OUTPUT.JPG)<br />
 
 ## Conclusion
+We have done a thorough studny on tendency of criminal recidivism and made a ML model to predict the likelihood of someone commiting crimal recidivism.
 Please check out the paper we published at the following URL - 
 ```
-https://link.springer.com/chapter/10.1007/978-981-15-8443-5_53
+http://sersc.org/journals/index.php/IJAST/article/view/24940 <br />
 ```
 We really appreciate your interest
 
 ## Authors
 ```
 Heeket Mehta
-Ayushi Lodaria
 Shanay Shah
-Danish Jain
+Neil Patel
 ```
 
 ## Mentorship -
 ```
-Prof. Lakshmi Kurup
+Prof. Pratik Kanani
 ```
 
 
