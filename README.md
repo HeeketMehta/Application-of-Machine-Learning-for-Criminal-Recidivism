@@ -1,25 +1,104 @@
 # Classification Of Criminal Recidivism Based On Machine learning Techniques
 
-Application of Machine Learning to Predict and Classify criminals based on various parameters like Marital Status, Decile Score, Sex Code and other such attributes. 
 
-- Criminal Recidivism is a tendency of a convicted felon to commit an offence again.
-- This project aims at limiting and checking recidivism by classifying criminals into categories (Low, Medium, High) to gauge their tendency of commiting a crime.
-- This is done according to the general trends of criminals with similar characteristics, taking into account various attributes like Sex Code, Marital Status, Ethnic Code, etc.
-- We use and compare classification algorithms of Machine Learning like Random Forest classifiers, K-Nearest Neighbours algorithm and Logistic Regression for classification of the criminals into respective categories.
-- Upon cleaning and filtering of the dataset, we obtained from Carnegie Mellon University (CMU) data repository, we implemented these algorithms using Scikit Learn library of python to perform machine learning on the data.
-- Data mining and cleaning algorithms had to be applied to obtain the data in the desired format and also to get rid of the noisy and unwanted data.
-- We observe how various algorithms perform and obtain the following results (in the OUTPUT_CMD.jpg file)-
-  a] Random Forest Accuracry Score = 87.815 %
-  b] kNN Accuracry Score = 86.88 %
-  c] Logistic Regression Accuracry Score =  75.29 %
+# A Machine Learning Approach to Analyze Marine Life Sustainability
 
-  Thus, the performance of the Random Forest classifier is the most suitable in classifying the criminals into Low, Medium and High score (risk) of recidivism.
+```
+Heeket Mehta, Shanay Shah, Neil Patel, Pratik Kanani (2020)<br />
+“Classification of Criminal Recidivism Using Machine Learning Techniques”<br />
+International Journal of Advanced Science and Technology, 29(04), pp. 5110<br />
+http://sersc.org/journals/index.php/IJAST/article/view/24940 <br />
+```
 
-- Further, we have plotted graphs, for data visualization of multiple attributes, which may be assumed to have no impact on the score, but are actually useful for classification.
-- These graphs are saved as jpg images in the Analysis folder.
+## Project Overview <br />
 
-Future Scope and Conclusion :-
+There are numerous cases in the recent times, where a criminal commits a crime, immediately after being granted parole, this is called Criminal Recidivism. The act of recidivism poses a great threat to the society and thus needs to be checked. <br />
 
-The results of classification should help police authorities to grant parole/bail to the criminals who are at a relatively lower risk of commiting another felony/crime.
-This should also help reduce the crime rate in society, thus ensuring the welfare and harmony of the society.
-The analysis provided through data visualisation may provide a better understanding and easier perspective/insight of what attributes contribute to most recidivism according to the trends of the 18,000(approxmiately) criminal records in the dataset.
+This paper posits a machine learning approach to detect and predict the tendency of a criminal to commit recidivism. The proposed system helps classify the criminals into Low, Medium, and High risk of committing recidivism. Features like ‘Ethnic code’, ‘Marital Status’, ‘Age’, ‘Sex Code’, ‘Legal Status’ and many more are considered while training the model on the dataset. <br />
+
+Supervised Classification Algorithms are implemented, and voting is subsequently done, to select the algorithm with the highest accuracy. The Random Forest Algorithm provides the highest accuracy score followed by KNN and lastly Logistic Regression. Moreover, the data is analyzed using visualization charts, where various attributes are deeply analyzed in relation to the target variable ‘Score Text’. <br />
+
+Graphs between these attributes and the target variable highlight trends, which may provide useful insights to parole granting authorities while assessing a criminal for parole. Stratified K- Fold Cross Validation is used to bolster the results of the algorithms, which gives us accuracy score similar to the above algorithms. Thus, it validates and renders the algorithms unbiased and fair.<br /><br />
+
+```
+Concepts - Data Science, Data Analysis, Data Visualization, Machine Learning
+Programming Language - Python
+```
+
+## Getting Started 
+
+We mostly use Python in the project and hence, we used libraries that can be installed using - <br />
+```
+pip install pandas
+pip install numpy
+pip install seaborn
+pip install matplotlib
+pip install sklearn
+```
+
+## Proposed Architecture / Flow Diagram
+We propose the flow diagram below and execute the methodology in the following sense, to obtain results of criminal recidivism, to understand various trends, and build machine learning models to understand which factors are the most significant and whether we can predict the tendency of criminal recidivism.<br />
+
+![CR Model](https://github.com/HeeketMehta/Application-of-Machine-Learning-for-Criminal-Recidivism/blob/master/OUTPUTS/CR%20Model.png)<br />
+
+## Exploratory Data Analysis
+
+### Histogram of Age v/s Criminal Recidivism
+
+![Age_vs_Reci](https://github.com/HeeketMehta/Application-of-Machine-Learning-for-Criminal-Recidivism/blob/master/OUTPUTS/Histogram%20of%20AGE.png)<br />
+
+### Ethnic Code v/s Criminal Recidivism
+
+![ethnic_vs_Reci](https://github.com/HeeketMehta/Application-of-Machine-Learning-for-Criminal-Recidivism/blob/master/OUTPUTS/Ethnic%20Code.JPG)<br />
+
+### Legal Status v/s Criminal Recidivism
+
+![legal_status_vs_Reci](https://github.com/HeeketMehta/Application-of-Machine-Learning-for-Criminal-Recidivism/blob/master/OUTPUTS/Legal%20Status.JPG)<br />
+
+
+### Marital Status v/s Criminal Recidivism
+
+![Marital_status_vs_Reci](https://github.com/HeeketMehta/Application-of-Machine-Learning-for-Criminal-Recidivism/blob/master/OUTPUTS/Marital%20Status.JPG)<br />
+
+
+
+
+## Machine Learning Results
+
+Random Forest algorithm performs the best, to classify the water quality into various classes, with the segragation being on the quality of water, for both being potable and for the marine life present in the waterbodies.<br />
+
+The results - in terms of confusion matrix/ cross tab are mentioned below - 
+### Random Forest Implementation -
+![Random Forest Implementation](https://github.com/HeeketMehta/Marine-Life-Sustainability-using-ML/blob/master/OUTPUT/Random%20Forest%20Output.JPG)<br />
+
+### Support Vector Machine Implementation -
+![Support Vector Machine Implementation](https://github.com/HeeketMehta/Marine-Life-Sustainability-using-ML/blob/master/OUTPUT/SVM_OUTPUT.JPG)
+<br />
+
+### K-Nearest Neigbors Implementation -
+![K-Nearest Neigbors Implementation](https://github.com/HeeketMehta/Marine-Life-Sustainability-using-ML/blob/master/OUTPUT/KNN_OUTPUT.JPG)<br />
+
+## Conclusion
+Please check out the paper we published at the following URL - 
+```
+https://link.springer.com/chapter/10.1007/978-981-15-8443-5_53
+```
+We really appreciate your interest
+
+## Authors
+```
+Heeket Mehta
+Ayushi Lodaria
+Shanay Shah
+Danish Jain
+```
+
+## Mentorship -
+```
+Prof. Lakshmi Kurup
+```
+
+
+
+
+
